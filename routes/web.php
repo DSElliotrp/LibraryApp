@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Book;
 
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/', fn() => view('home', ['books' => Book::all()]))->name('home');
+
+    Route::get('/books', fn() => view('books', ['books' => Book::paginate(5)]))->name('books');
+
+    Route::get('/book/{id}', fn($id) => view('book', ['book' => Book::find($id)]));
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -13,4 +18,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

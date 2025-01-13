@@ -12,9 +12,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
-                    </x-nav-link>
+                    @foreach (config('navigation.pages') as $page)
+                        <x-nav-link :href="route($page['route'])" :active="request()->routeIs($page['route'])">
+                            {{ __($page['name']) }}
+                        </x-nav-link>
+                    @endforeach
                 </div>
             </div>
 
@@ -67,9 +69,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
+            @foreach (config('navigation.pages') as $page)
+                <x-responsive-nav-link :href="route($page['route'])" :active="request()->routeIs($page['route'])">
+                    {{ __($page['name']) }}
+                </x-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->

@@ -37,6 +37,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Create SQLite database
+      run: |
+        touch database/database.sqlite
+        php artisan migrate --force
+
       - name: Copy environment file
         run: cp .env.example .env
 
