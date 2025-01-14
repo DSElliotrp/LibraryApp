@@ -7,7 +7,7 @@ use App\Models\Book;
 Route::middleware('auth')->group(function () {
     Route::get('/', fn() => view('home', ['books' => Book::all()]))->name('home');
 
-    Route::get('/books', fn() => view('books', ['books' => Book::paginate(5)]))->name('books');
+    Route::get('/books', fn() => view('books', ['books' => Book::with(['author', 'genres', 'copies.borrowings'])->paginate(5)]))->name('books');
 
     Route::get('/book/{id}', fn($id) => view('book', ['book' => Book::find($id)]));
 });
