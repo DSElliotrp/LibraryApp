@@ -10,6 +10,8 @@ class BookCopy extends Model
     /** @use HasFactory<\Database\Factories\BookCopyFactory> */
     use HasFactory;
 
+    protected $guarded = [];
+
     public function book()
     {
         return $this->belongsTo(Book::class);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('book_copies', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Book::class)->constrained();
+            $table->foreignIdFor(\App\Models\Book::class)->constrained()->onDelete('cascade');
             $table->string('reference');
             $table->timestamps();
         });

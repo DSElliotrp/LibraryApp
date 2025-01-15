@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Book details') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Book details') }}
+            </h2>
+            <x-link-button href="/books/{{ $book->id }}/edit">
+                {{ __('Edit Book') }}
+            </x-link-button>
+        </div>
     </x-slot>
 
     <div class="max-w-2xl mx-2 sm:mx-auto bg-gray-800 shadow-lg rounded-lg overflow-hidden mt-12 relative">
@@ -11,7 +16,7 @@
         </div>
         <div class="px-8 py-8">
             <h1 class="text-2xl font-bold text-white mb-2">{{ $book->title }}</h1>
-            <p class="text-gray-300 mb-4">By <span class="font-semibold">{{ $book->author->name }}</span></p>
+            <p class="text-gray-300 mb-4">By <span class="font-semibold">{{ $book->author }}</span></p>
             <div class="flex items-center mb-4">
                 <x-books.book-tags :book="$book" />
             </div>
