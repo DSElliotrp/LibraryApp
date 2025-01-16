@@ -26,6 +26,13 @@
                         </div>
 
                         <div class="sm:col-span-full">
+                            <x-input-label for="genres" :value="__('Genres')" />
+                            <x-input-multiselect id="genres" name="genres" class="mt-1 block w-full" :options="['hello', 'world']"
+                                required />
+                            <x-input-error class="mt-2" :messages="$errors->get('genres')" />
+                        </div>
+
+                        <div class="sm:col-span-full">
                             <x-input-label for="published_at" :value="__('Publication date')" />
                             <x-text-input id="published_at" name="published_at" type="date" class="mt-1 block w-full"
                                 required />
@@ -58,7 +65,7 @@
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
+                <a href="/books" class="text-sm/6 font-semibold text-white">Cancel</a>
                 <x-primary-button type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Add

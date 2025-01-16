@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @foreach (config('navigation.pages') as $page)
-                        <x-nav-link :href="route($page['route'])" :active="request()->routeIs($page['route'])">
+                        <x-nav-link :href="'/' . $page['route']" :active="request()->routeIs($page['route'])">
                             {{ __($page['name']) }}
                         </x-nav-link>
                     @endforeach
@@ -70,7 +70,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach (config('navigation.pages') as $page)
-                <x-responsive-nav-link :href="route($page['route'])" :active="request()->routeIs($page['route'])">
+                <x-responsive-nav-link :href="'/' . $page['route']" :active="request()->routeIs($page['route'])">
                     {{ __($page['name']) }}
                 </x-responsive-nav-link>
             @endforeach
