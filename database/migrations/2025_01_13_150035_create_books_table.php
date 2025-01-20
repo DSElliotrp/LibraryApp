@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('published_at')->nullable();
             $table->string('isbn');
             $table->foreignIdFor(\App\Models\User::class, 'created_by_user_id')->constrained()->onDelete('cascade');
+            $table->string('photo_path')->nullable();
             $table->timestamps();
         });
     }

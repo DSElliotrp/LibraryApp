@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="max-w-xl mx-auto my-12 bg-gray-800 rounded-lg p-4">
-        <form method="POST" action="/books">
+        <form method="POST" action="/books" enctype="multipart/form-data">
             @csrf
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
@@ -59,6 +59,13 @@
                             <x-text-input id="number_of_copies" name="number_of_copies" type="number"
                                 class="mt-1 block w-full" required />
                             <x-input-error class="mt-2" :messages="$errors->get('number_of_copies')" />
+                        </div>
+
+                        <div class="sm:col-span-full">
+                            <x-input-label for="photo" :value="__('Photo')" />
+                            <x-text-input id="photo" name="photo" type="file"
+                                class="mt-1 block w-full" required />
+                            <x-input-error class="mt-2" :messages="$errors->get('photo')" />
                         </div>
                     </div>
                 </div>

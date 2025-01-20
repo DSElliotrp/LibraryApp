@@ -4,7 +4,7 @@ return [
     'pages' => [
         'home' => [
             'name' => 'Home',
-            'route' => 'home',
+            'route' => '',
         ],
         'books' => [
             'name' => 'Books',

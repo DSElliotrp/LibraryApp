@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Genre;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -42,18 +43,22 @@ class BookController extends Controller
             'isbn' => 'required|digits:13',
             'number_of_copies' => 'required|integer|min:1',
             'genres' => 'required',
+            'photo' => 'required|image',
         ]);
 
         DB::beginTransaction();
 
         try {
+            $photoPath = request('photo')->store('photos', 'public');
+
             $book = Book::create([
                 'title' => request('title'),
                 'author' => request('author'),
                 'description' => request('description'),
                 'published_at' => request('published_at'),
                 'isbn' => request('isbn'),
-                'created_by_user_id' => 1,
+                'created_by_user_id' => Auth::id(),
+                'photo_path' => $photoPath,
             ]);
     
             foreach (explode(',', request('genres')) as $genreName) {

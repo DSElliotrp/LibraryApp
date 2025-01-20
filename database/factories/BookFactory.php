@@ -20,7 +20,7 @@ class BookFactory extends Factory
         return [
             'title' => fake()->sentence(3),
             'author' => fake()->name(),
-            'description' => fake()->paragraph(),
+            'description' => fake()->text(500),
             'published_at' => fake()->date(),
             'isbn' => fake()->isbn13(),
             'created_by_user_id' => User::first()->id,
