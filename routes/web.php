@@ -6,10 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', fn() => view('home'))->name('home');
+    Route::resource('books', BookController::class);
 });
-
-Route::middleware('auth')->resource('books', BookController::class);
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

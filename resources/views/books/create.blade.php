@@ -26,9 +26,9 @@
                         </div>
 
                         <div class="sm:col-span-full">
-                            <x-input-label for="genres" :value="__('Genres')" />
-                            <x-input-multiselect id="genres" name="genres" class="mt-1 block w-full" :options="['hello', 'world']"
-                                required />
+                            <x-input-label for="genres" :value="__('Genres (comma separated)')" />
+                            <x-text-input id="genres" name="genres" type="text" class="mt-1 block w-full"
+                                required placeholder="Biography,Non-Fiction" />
                             <x-input-error class="mt-2" :messages="$errors->get('genres')" />
                         </div>
 
