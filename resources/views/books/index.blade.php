@@ -4,9 +4,11 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Books') }}
             </h2>
-            <x-link-button href="/books/create">
-                {{ __('Add Book') }}
-            </x-link-button>
+            @can('create books')
+                <x-link-button href="/books/create">
+                    {{ __('Add Book') }}
+                </x-link-button>
+            @endcan
         </div>
     </x-slot>
 

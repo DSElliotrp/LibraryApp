@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,9 +21,9 @@ class BookFactory extends Factory
             'title' => fake()->sentence(3),
             'author' => fake()->name(),
             'description' => fake()->paragraph(),
-            'published_at' => fake()->optional()->dateTime(),
+            'published_at' => fake()->date(),
             'isbn' => fake()->isbn13(),
-            'created_by_user_id' => \App\Models\User::factory(),
+            'created_by_user_id' => User::first()->id,
         ];
     }
 }

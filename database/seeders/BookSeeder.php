@@ -15,12 +15,10 @@ class BookSeeder extends Seeder
     public function run(): void
     {
         Book::factory(30)->create()->each(function ($book) {
-            // Create 1-3 book copies for each book
             BookCopy::factory(rand(1, 3))->create(['book_id' => $book->id])->each(function ($bookCopy) {
-                // Conditionally create a borrowing for each book copy
-                if (rand(0, 1)) {
-                    Borrowing::factory()->create(['book_copy_id' => $bookCopy->id]);
-                }
+                // if (rand(0, 1)) {
+                //     Borrowing::factory()->create(['book_copy_id' => $bookCopy->id]);
+                // }
             });
 
             $book->genres()->attach(rand(1, 11));

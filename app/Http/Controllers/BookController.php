@@ -76,17 +76,17 @@ class BookController extends Controller
         return redirect('/books');
     }
 
-    public function show($book)
+    public function show(Book $book)
     {
         return view('books.show', ['book' => $book]);
     }
 
-    public function edit($book)
+    public function edit(Book $book)
     {
         return view('books.edit', ['book' => $book]);
     }
 
-    public function update($book)
+    public function update(Book $book)
     {
         request()->validate([
             'title' => 'required',
@@ -108,7 +108,7 @@ class BookController extends Controller
         return redirect('/books/' . $book->id);
     }
 
-    public function destroy($book)
+    public function destroy(Book $book)
     {
         $book->delete();
 

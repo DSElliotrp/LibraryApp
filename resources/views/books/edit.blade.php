@@ -27,8 +27,15 @@
                         </div>
 
                         <div class="sm:col-span-full">
+                            <x-input-label for="genres" :value="__('Genres (comma separated)')" />
+                            <x-text-input id="genres" name="genres" type="text" class="mt-1 block w-full"
+                                required placeholder="Biography,Non-Fiction" :value="$book->genres->pluck('name')->implode(',')"/>
+                            <x-input-error class="mt-2" :messages="$errors->get('genres')" />
+                        </div>
+
+                        <div class="sm:col-span-full">
                             <x-input-label for="published_at" :value="__('Publication date')" />
-                            <x-text-input id="published_at" name="published_at" type="date" class="mt-1 block w-full" value="{{ $book->published_at }}"
+                            <x-text-input id="published_at" name="published_at" type="text" class="mt-1 block w-full" value="{{ $book->published_at }}"
                                 required />
                             <x-input-error class="mt-2" :messages="$errors->get('published_at')" />
                         </div>
