@@ -7,11 +7,11 @@
         </div>
     </x-slot>
 
-    <div class="max-w-2xl mx-2 sm:mx-auto grid grid-rows-4 grid-cols-3 md:grid-rows-3 gap-4 mt-12">
-        <div class="md:col-span-1 md:row-span-1">
-            <img alt="" src="{{ $book->photo_path ? asset($book->photo_path) : 'http://picsum.photos/seed/'.$book->id.'/400/600' }}" class="rounded-xl">
+    <div class="max-w-2xl mx-2 sm:mx-auto grid grid-cols-3 gap-4 mt-12">
+        <div class="md:col-span-1">
+            <img alt="" src="{{ $book->photo_path ? asset($book->photo_path) : 'http://picsum.photos/seed/'.$book->id.'/400/600' }}" class="rounded-xl object-cover">
         </div>
-        <div class="col-span-2 row-span-1 p-4 bg-gray-800 shadow-lg rounded-lg overflow-hidden relative">
+        <div class="col-span-2 p-4 bg-gray-800 shadow-lg rounded-lg overflow-hidden relative">
             <div class="absolute top-0 right-0 mt-2 mr-2 text-xs text-gray-400 sm:text-sm">
                 ISBN: {{ $book->isbn }}
             </div>
@@ -25,12 +25,12 @@
                 @endisset
             </div>
         </div>
-        <div class="h-fit col-span-3 row-span-2 md:col-span-3 md:row-span-1 bg-gray-800 shadow-lg rounded-lg overflow-hidden p-8">
+        <div class="h-fit col-span-3 md:col-span-3 bg-gray-800 shadow-lg rounded-lg overflow-hidden p-8">
             <h3 class="text-white font-bold pb-2">{{__("Description")}}</h3>
             <p class="text-gray-200">{{ $book->description }}</p>
         </div>
         @can('edit books')
-            <x-link-button class="md:col-span-1 md:row-span-1" href="/books/{{ $book->id }}/edit">
+            <x-link-button class="md:col-span-1" href="/books/{{ $book->id }}/edit">
                 {{ __('Edit Book') }}
             </x-link-button>
         @endcan
