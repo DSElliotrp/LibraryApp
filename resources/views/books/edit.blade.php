@@ -56,13 +56,6 @@
                             </x-text-area-input>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
-
-                        <div class="sm:col-span-full">
-                            <x-input-label for="number_of_copies" :value="__('Number of copies')" />
-                            <x-text-input id="number_of_copies" name="number_of_copies" type="number" value="{{ $book->availableCopies()->count() }}"
-                                class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('number_of_copies')" />
-                        </div>
                     </div>
                 </div>
             </div>

@@ -62,7 +62,7 @@ class BookController extends Controller
             ]);
     
             foreach (explode(',', request('genres')) as $genreName) {
-                $genre = Genre::firstOrCreate(['name' => Str::title($genreName)]);
+                $genre = Genre::firstOrCreate(['name' => Str::title(trim($genreName))]);
                 $book->genres()->attach($genre);
             }
     
@@ -99,16 +99,31 @@ class BookController extends Controller
             'description' => 'required',
             'published_at' => 'date',
             'isbn' => 'required|digits:13',
-            'number_of_copies' => 'required|integer|min:1',
+            'genres' => 'required',
         ]);
 
-        $book->update([
-            'title' => request('title'),
-            'author' => request('author'),
-            'description' => request('description'),
-            'published_at' => request('published_at'),
-            'isbn' => request('isbn'),
-        ]);
+        DB::beginTransaction();
+
+        try {
+            $book->update([
+                'title' => request('title'),
+                'author' => request('author'),
+                'description' => request('description'),
+                'published_at' => request('published_at'),
+                'isbn' => request('isbn'),
+            ]);
+    
+            $genres = collect(explode(',', request('genres')))->map(function ($genreName) { 
+                return Genre::firstOrCreate(['name' => Str::title(trim($genreName))]);
+            });
+    
+            $book->genres()->sync($genres);
+
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
 
         return redirect('/books/' . $book->id);
     }
