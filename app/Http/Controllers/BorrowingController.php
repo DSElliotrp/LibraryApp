@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\BookReturnReminderEmailJob;
+use App\Mail\BookBorrowed;
 use App\Models\Book;
 use App\Models\BookCopy;
 use App\Models\Borrowing;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BorrowingController extends Controller
 {
@@ -23,12 +26,15 @@ class BorrowingController extends Controller
     {
         $user = User::where(['email' => request()->customer_email])->firstOrFail();
 
-        Borrowing::create([
+        $borrowing = Borrowing::create([
             'book_copy_id' => $copy->id,
             'borrowed_at' => now(),
             'due_at' => now()->addDays(28),
             'user_id' => $user->id,
         ]);
+
+        Mail::to($user)->queue(new BookBorrowed($book, $borrowing, $user));
+        BookReturnReminderEmailJob::dispatch($book, $borrowing, $user)->delay($borrowing->due_at->subDay());
 
         return view('books.show', [
             'book' => $book,
