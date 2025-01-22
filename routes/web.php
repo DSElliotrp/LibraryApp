@@ -14,6 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/books/{book}/copies/{copy}/borrowing/{borrowing}/edit', [BorrowingController::class, 'update']);
     Route::delete('/books/{book}/copies/{copy}', [CopyController::class, 'destroy']);
     Route::post('/books/{book}/copies', [CopyController::class, 'store']);
+    Route::get('/my-books', [BorrowingController::class, 'index'])->name('my-books');
 });
 
 Route::middleware('auth')->group(function () {

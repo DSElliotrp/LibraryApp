@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\BookCopy;
 use App\Models\Borrowing;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class BorrowingController extends Controller
 {
@@ -42,6 +43,13 @@ class BorrowingController extends Controller
 
         return view('books.show', [
             'book' => $book,
+        ]);
+    }
+
+    public function index()
+    {
+        return view('borrowings.index', [
+            'borrowings' => Borrowing::with('bookCopy.book')->where('user_id', Auth::id())->get(),
         ]);
     }
 }

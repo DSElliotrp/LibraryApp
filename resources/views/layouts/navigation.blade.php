@@ -13,9 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @foreach (config('navigation.pages') as $page)
-                        <x-nav-link :href="'/' . $page['route']" :active="request()->routeIs($page['route'])">
-                            {{ __($page['name']) }}
-                        </x-nav-link>
+                        @if (!isset($page['permissions']) || collect($page['permissions'])->contains(function($permission) { return auth()->user()->can($permission); }))
+                            <x-nav-link :href="'/' . $page['route']" :active="request()->routeIs($page['route'])">
+                                {{ __($page['name']) }}
+                            </x-nav-link>
+                        @endif
                     @endforeach
                 </div>
             </div>

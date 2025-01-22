@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Borrowing extends Model
 {
-    /** @use HasFactory<\Database\Factories\BorrowingFactory> */
     use HasFactory;
 
     protected $guarded = [];
