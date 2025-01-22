@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\BookCopy::class)->constrained();
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
+            $table->foreignIdFor(\App\Models\BookCopy::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->onDelete('cascade');
             $table->dateTime('borrowed_at');
             $table->dateTime('due_at')->nullable();
             $table->dateTime('returned_at')->nullable();

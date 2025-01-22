@@ -35,21 +35,38 @@
                 @foreach ($book->copies as $copy)
                     <div class="flex justify-between flex-col sm:flex-row gap-4 items-center p-2 col-span-3 md:col-span-1 bg-gray-700 shadow-lg rounded-lg overflow-hidden p-1">
                         <h3 class="text-white font-bold text-sm">{{ $copy->reference }}</h3>
-                        @if (!$copy->isBorrowed())
-                            <x-link-button href="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/create">
-                                {{ __('Loan') }}
-                            </x-link-button>
-                        @else
+                        @if ($copy->isBorrowed())
                             <p class="text-white">Due on: {{ $copy->activeBorrowing()->due_at }}</p>
-                            <x-primary-button type="submit" form="return-form-{{ $copy->id }}">
-                                {{ __('Return') }}
-                            </x-primary-button>
-                            <form method="POST" action="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/{{ $copy->activeBorrowing()->id }}/edit" id="return-form-{{ $copy->id }}" class="hidden">
-                                @csrf
-                            </form>
                         @endif
+                        <div class="flex gap-4">
+                            @if (!$copy->isBorrowed())
+                                <x-link-button href="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/create">
+                                    {{ __('Loan') }}
+                                </x-link-button>
+                            @else
+                                <x-primary-button type="submit" form="return-form-{{ $copy->id }}">
+                                    {{ __('Return') }}
+                                </x-primary-button>
+                                <form method="POST" action="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/{{ $copy->activeBorrowing()->id }}/edit" id="return-form-{{ $copy->id }}" class="hidden">
+                                    @csrf
+                                </form>
+                            @endif
+                            <x-danger-button form="delete-form-{{ $copy->id }}">
+                                {{ __('Delete') }}
+                            </x-danger-button>
+                            <form method="POST" action="/books/{{ $book->id }}/copies/{{ $copy->id }}" id="delete-form-{{ $copy->id }}" class="hidden">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </div>
                     </div>
                 @endforeach
+                <x-primary-button type="submit" form="add-form">
+                    {{ __('Add copy') }}
+                </x-primary-button>
+                <form method="POST" action="/books/{{ $book->id }}/copies" id="add-form" class="hidden">
+                    @csrf
+                </form>
             </div>
         @endcan
         <div class="col-span-3 flex">

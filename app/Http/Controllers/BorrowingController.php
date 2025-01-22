@@ -40,8 +40,6 @@ class BorrowingController extends Controller
             'returned_at' => now(),
         ]);
 
-        $borrowing->save();
-        
         return view('books.show', [
             'book' => $book,
         ]);

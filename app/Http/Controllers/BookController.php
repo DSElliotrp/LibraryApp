@@ -68,7 +68,7 @@ class BookController extends Controller
     
             foreach (range(1, request('number_of_copies')) as $i) {
                 $book->copies()->create([
-                    'reference' => $book->isbn . '-' . $i,
+                    'reference' => $book->isbn . '_' . $i,
                 ]);
             }
 
