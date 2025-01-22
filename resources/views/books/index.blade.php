@@ -37,10 +37,10 @@
                 </div>
             </a>
         @endforeach
+        <div>
+            {{ $books->withQueryString()->links() }}
+        </div>
     </div>
 
-    <div>
-        {{ $books->withQueryString()->links()}}
-    </div>
 
 </x-app-layout>
