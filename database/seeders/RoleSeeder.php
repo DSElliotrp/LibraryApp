@@ -18,9 +18,9 @@ class RoleSeeder extends Seeder
 
         $createBookPermission = Permission::create(['name' => 'create books']);
         $editBookPermission = Permission::create(['name' => 'edit books']);
-        $borrowBookPermission = Permission::create(['name' => 'borrow books']);
+        $loanBookPermission = Permission::create(['name' => 'loan books']);
 
-        $librarianRole->givePermissionTo($createBookPermission, $editBookPermission);
-        $customerRole->givePermissionTo($borrowBookPermission);
+        $librarianRole->givePermissionTo($createBookPermission, $editBookPermission, $loanBookPermission);
+        // $customerRole->givePermissionTo($borrowBookPermission);
     }
 }

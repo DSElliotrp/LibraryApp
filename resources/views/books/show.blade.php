@@ -25,15 +25,39 @@
                 @endisset
             </div>
         </div>
-        <div class="h-fit col-span-3 md:col-span-3 bg-gray-800 shadow-lg rounded-lg overflow-hidden p-8">
+        <div class="h-fit col-span-3 bg-gray-800 shadow-lg rounded-lg overflow-hidden p-8">
             <h3 class="text-white font-bold pb-2">{{__("Description")}}</h3>
             <p class="text-gray-200">{{ $book->description }}</p>
         </div>
-        @can('edit books')
-            <x-link-button class="md:col-span-1" href="/books/{{ $book->id }}/edit">
-                {{ __('Edit Book') }}
-            </x-link-button>
+        @can('loan books')
+            <div class="col-span-3 bg-gray-800 shadow-lg rounded-lg overflow-hidden p-8 space-y-4">
+                <h3 class="text-white font-bold pb-2">{{__("Copies")}}</h3>
+                @foreach ($book->copies as $copy)
+                    <div class="flex justify-between flex-col sm:flex-row gap-4 items-center p-2 col-span-3 md:col-span-1 bg-gray-700 shadow-lg rounded-lg overflow-hidden p-1">
+                        <h3 class="text-white font-bold text-sm">{{ $copy->reference }}</h3>
+                        @if (!$copy->isBorrowed())
+                            <x-link-button href="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/create">
+                                {{ __('Loan') }}
+                            </x-link-button>
+                        @else
+                            <p class="text-white">Due on: {{ $copy->activeBorrowing()->due_at }}</p>
+                            <x-primary-button type="submit" form="return-form-{{ $copy->id }}">
+                                {{ __('Return') }}
+                            </x-primary-button>
+                            <form method="POST" action="/books/{{ $book->id }}/copies/{{ $copy->id }}/borrowing/{{ $copy->activeBorrowing()->id }}/edit" id="return-form-{{ $copy->id }}" class="hidden">
+                                @csrf
+                            </form>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
         @endcan
+        <div class="col-span-3 flex">
+            @can('edit books')
+                <x-link-button href="/books/{{ $book->id }}/edit">
+                    {{ __('Edit book') }}
+                </x-link-button>
+            @endcan
+        </div>
     </div>
-
 </x-app-layout>

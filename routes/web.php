@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', fn() => view('home'))->name('home');
     Route::resource('books', BookController::class);
+    Route::get('/books/{book}/copies/{copy}/borrowing/create', [BorrowingController::class, 'create']);
+    Route::post('/books/{book}/copies/{copy}/borrowing', [BorrowingController::class, 'store']);
+    Route::post('/books/{book}/copies/{copy}/borrowing/{borrowing}/edit', [BorrowingController::class, 'update']);
 });
 
 Route::middleware('auth')->group(function () {

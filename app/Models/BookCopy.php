@@ -22,8 +22,13 @@ class BookCopy extends Model
         return $this->hasMany(Borrowing::class);
     }
 
-    public function isBorrowed()
+    public function isBorrowed(): bool
     {
         return $this->borrowings()->whereNull('returned_at')->exists();
+    }
+
+    public function activeBorrowing(): Borrowing
+    {
+        return $this->borrowings()->whereNull('returned_at')->first();
     }
 }

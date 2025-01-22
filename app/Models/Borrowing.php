@@ -10,6 +10,8 @@ class Borrowing extends Model
     /** @use HasFactory<\Database\Factories\BorrowingFactory> */
     use HasFactory;
 
+    protected $guarded = [];
+
     public function bookCopy()
     {
         return $this->belongsTo(BookCopy::class);

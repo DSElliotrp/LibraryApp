@@ -63,14 +63,13 @@
             <div class="mt-6 flex items-center justify-between gap-x-6">
                 <div class="flex items-center gap-x-6">
                     <x-danger-button form="delete-form">
-                        Delete
+                        {{ __('Delete') }}
                     </x-danger-button>
                 </div>
                 <div class="flex items-center gap-x-6">
                     <a href="/books/{{ $book->id }}" class="text-sm/6 font-semibold text-white">Cancel</a>
-                    <x-primary-button type="submit"
-                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Update
+                    <x-primary-button type="submit">
+                        {{ __('Update') }}
                     </x-primary-button>
                 </div>
             </div>
