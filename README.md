@@ -1,4 +1,14 @@
-<a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="150" alt="Laravel Logo"></a>
+<p>Small MVC project to learn the basics of Laravel and PHP:</p>
+<ul>
+    <li>Eloquent ORM</li>
+    <li>Lazy vs eager loading with eloquent</li>
+    <li>Artisan CLI</li>
+    <li>DB model factories and seeders</li>
+    <li>Blade templates, forms and form validation in Laravel</li>
+    <li>Authentication in Laravel</li>
+    <li>User roles and permissions</li>
+    <li>Queues, jobs and sending emails in Laravel</li>
+</ul>
 
 <img src="https://github.com/user-attachments/assets/0b6cf087-0b60-4c04-9074-34276f6a8f4e" width="400" />
 <img src="https://github.com/user-attachments/assets/858caf01-1c4e-4748-abbe-0b2a72e4dc30" width="400" />
